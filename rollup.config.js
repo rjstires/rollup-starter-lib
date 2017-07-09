@@ -1,5 +1,6 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import buble from 'rollup-plugin-buble';
 import pkg from './package.json';
 
 export default [
@@ -11,7 +12,8 @@ export default [
 		moduleName: 'howLongUntilLunch',
 		plugins: [
 			resolve(), // so Rollup can find `ms`
-			commonjs() // so Rollup can convert `ms` to an ES module
+			commonjs(), // so Rollup can convert `ms` to an ES module
+			buble() // transpile ES2015+ to ES5
 		]
 	},
 
@@ -26,6 +28,9 @@ export default [
 		targets: [
 			{ dest: pkg.main, format: 'cjs' },
 			{ dest: pkg.module, format: 'es' }
+		],
+		plugins: [
+			buble() // transpile ES2015+ to ES5
 		]
 	}
 ];
