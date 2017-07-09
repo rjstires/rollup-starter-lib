@@ -13,7 +13,9 @@ export default [
 		plugins: [
 			resolve(), // so Rollup can find `ms`
 			commonjs(), // so Rollup can convert `ms` to an ES module
-			buble() // transpile ES2015+ to ES5
+			buble({  // transpile ES2015+ to ES5
+				exclude: ['node_modules/**']
+			})
 		]
 	},
 
@@ -30,7 +32,9 @@ export default [
 			{ dest: pkg.module, format: 'es' }
 		],
 		plugins: [
-			buble() // transpile ES2015+ to ES5
+			buble({
+				exclude: ['node_modules/**']
+			})
 		]
 	}
 ];
